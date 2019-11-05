@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wax.lp.dao.CrmBusinessProductMapper">
+  <resultMap id="BaseResultMap" type="com.wax.lp.bean.CrmBusinessProduct">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="productid" jdbcType="INTEGER" property="productid" />
+    <result column="salesprice" jdbcType="REAL" property="salesprice" />
+    <result column="estimateprice" jdbcType="REAL" property="estimateprice" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="discountrate" jdbcType="INTEGER" property="discountrate" />
+    <result column="taxrate" jdbcType="INTEGER" property="taxrate" />
+    <result column="unitprice" jdbcType="REAL" property="unitprice" />
+    <result column="subtotal" jdbcType="REAL" property="subtotal" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="subtotalval" jdbcType="REAL" property="subtotalval" />
+    <result column="discountprice" jdbcType="REAL" property="discountprice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, businessid, productid, salesprice, estimateprice, amount, discountrate, taxrate, 
+    unitprice, subtotal, description, subtotalval, discountprice
+  </sql>
+  <select id="selectByExample" parameterType="com.wax.lp.bean.CrmBusinessProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_business_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_business_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from crm_business_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wax.lp.bean.CrmBusinessProductExample">
+    delete from crm_business_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wax.lp.bean.CrmBusinessProduct">
+    insert into crm_business_product (id, businessid, productid, 
+      salesprice, estimateprice, amount, 
+      discountrate, taxrate, unitprice, 
+      subtotal, description, subtotalval, 
+      discountprice)
+    values (#{id,jdbcType=INTEGER}, #{businessid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, 
+      #{salesprice,jdbcType=REAL}, #{estimateprice,jdbcType=REAL}, #{amount,jdbcType=INTEGER}, 
+      #{discountrate,jdbcType=INTEGER}, #{taxrate,jdbcType=INTEGER}, #{unitprice,jdbcType=REAL}, 
+      #{subtotal,jdbcType=REAL}, #{description,jdbcType=VARCHAR}, #{subtotalval,jdbcType=REAL}, 
+      #{discountprice,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wax.lp.bean.CrmBusinessProduct">
+    insert into crm_business_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="productid != null">
+        productid,
+      </if>
+      <if test="salesprice != null">
+        salesprice,
+      </if>
+      <if test="estimateprice != null">
+        estimateprice,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="discountrate != null">
+        discountrate,
+      </if>
+      <if test="taxrate != null">
+        taxrate,
+      </if>
+      <if test="unitprice != null">
+        unitprice,
+      </if>
+      <if test="subtotal != null">
+        subtotal,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="subtotalval != null">
+        subtotalval,
+      </if>
+      <if test="discountprice != null">
+        discountprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="salesprice != null">
+        #{salesprice,jdbcType=REAL},
+      </if>
+      <if test="estimateprice != null">
+        #{estimateprice,jdbcType=REAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="discountrate != null">
+        #{discountrate,jdbcType=INTEGER},
+      </if>
+      <if test="taxrate != null">
+        #{taxrate,jdbcType=INTEGER},
+      </if>
+      <if test="unitprice != null">
+        #{unitprice,jdbcType=REAL},
+      </if>
+      <if test="subtotal != null">
+        #{subtotal,jdbcType=REAL},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="subtotalval != null">
+        #{subtotalval,jdbcType=REAL},
+      </if>
+      <if test="discountprice != null">
+        #{discountprice,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wax.lp.bean.CrmBusinessProductExample" resultType="java.lang.Long">
+    select count(*) from crm_business_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update crm_business_product
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessid != null">
+        businessid = #{record.businessid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null">
+        productid = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.salesprice != null">
+        salesprice = #{record.salesprice,jdbcType=REAL},
+      </if>
+      <if test="record.estimateprice != null">
+        estimateprice = #{record.estimateprice,jdbcType=REAL},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.discountrate != null">
+        discountrate = #{record.discountrate,jdbcType=INTEGER},
+      </if>
+      <if test="record.taxrate != null">
+        taxrate = #{record.taxrate,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitprice != null">
+        unitprice = #{record.unitprice,jdbcType=REAL},
+      </if>
+      <if test="record.subtotal != null">
+        subtotal = #{record.subtotal,jdbcType=REAL},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtotalval != null">
+        subtotalval = #{record.subtotalval,jdbcType=REAL},
+      </if>
+      <if test="record.discountprice != null">
+        discountprice = #{record.discountprice,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update crm_business_product
+    set id = #{record.id,jdbcType=INTEGER},
+      businessid = #{record.businessid,jdbcType=INTEGER},
+      productid = #{record.productid,jdbcType=INTEGER},
+      salesprice = #{record.salesprice,jdbcType=REAL},
+      estimateprice = #{record.estimateprice,jdbcType=REAL},
+      amount = #{record.amount,jdbcType=INTEGER},
+      discountrate = #{record.discountrate,jdbcType=INTEGER},
+      taxrate = #{record.taxrate,jdbcType=INTEGER},
+      unitprice = #{record.unitprice,jdbcType=REAL},
+      subtotal = #{record.subtotal,jdbcType=REAL},
+      description = #{record.description,jdbcType=VARCHAR},
+      subtotalval = #{record.subtotalval,jdbcType=REAL},
+      discountprice = #{record.discountprice,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wax.lp.bean.CrmBusinessProduct">
+    update crm_business_product
+    <set>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="salesprice != null">
+        salesprice = #{salesprice,jdbcType=REAL},
+      </if>
+      <if test="estimateprice != null">
+        estimateprice = #{estimateprice,jdbcType=REAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="discountrate != null">
+        discountrate = #{discountrate,jdbcType=INTEGER},
+      </if>
+      <if test="taxrate != null">
+        taxrate = #{taxrate,jdbcType=INTEGER},
+      </if>
+      <if test="unitprice != null">
+        unitprice = #{unitprice,jdbcType=REAL},
+      </if>
+      <if test="subtotal != null">
+        subtotal = #{subtotal,jdbcType=REAL},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="subtotalval != null">
+        subtotalval = #{subtotalval,jdbcType=REAL},
+      </if>
+      <if test="discountprice != null">
+        discountprice = #{discountprice,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wax.lp.bean.CrmBusinessProduct">
+    update crm_business_product
+    set businessid = #{businessid,jdbcType=INTEGER},
+      productid = #{productid,jdbcType=INTEGER},
+      salesprice = #{salesprice,jdbcType=REAL},
+      estimateprice = #{estimateprice,jdbcType=REAL},
+      amount = #{amount,jdbcType=INTEGER},
+      discountrate = #{discountrate,jdbcType=INTEGER},
+      taxrate = #{taxrate,jdbcType=INTEGER},
+      unitprice = #{unitprice,jdbcType=REAL},
+      subtotal = #{subtotal,jdbcType=REAL},
+      description = #{description,jdbcType=VARCHAR},
+      subtotalval = #{subtotalval,jdbcType=REAL},
+      discountprice = #{discountprice,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wax.lp.dao.CrmRoleMapper">
+  <resultMap id="BaseResultMap" type="com.wax.lp.bean.CrmRole">
+    <id column="roleid" jdbcType="INTEGER" property="roleid" />
+    <result column="rolecontent" jdbcType="VARCHAR" property="rolecontent" />
+    <result column="permissionid" jdbcType="INTEGER" property="permissionid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    roleid, rolecontent, permissionid
+  </sql>
+  <select id="selectByExample" parameterType="com.wax.lp.bean.CrmRoleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_role
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from crm_role
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wax.lp.bean.CrmRoleExample">
+    delete from crm_role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wax.lp.bean.CrmRole">
+    insert into crm_role (roleid, rolecontent, permissionid
+      )
+    values (#{roleid,jdbcType=INTEGER}, #{rolecontent,jdbcType=VARCHAR}, #{permissionid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wax.lp.bean.CrmRole">
+    insert into crm_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        roleid,
+      </if>
+      <if test="rolecontent != null">
+        rolecontent,
+      </if>
+      <if test="permissionid != null">
+        permissionid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="rolecontent != null">
+        #{rolecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionid != null">
+        #{permissionid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wax.lp.bean.CrmRoleExample" resultType="java.lang.Long">
+    select count(*) from crm_role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update crm_role
+    <set>
+      <if test="record.roleid != null">
+        roleid = #{record.roleid,jdbcType=INTEGER},
+      </if>
+      <if test="record.rolecontent != null">
+        rolecontent = #{record.rolecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permissionid != null">
+        permissionid = #{record.permissionid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update crm_role
+    set roleid = #{record.roleid,jdbcType=INTEGER},
+      rolecontent = #{record.rolecontent,jdbcType=VARCHAR},
+      permissionid = #{record.permissionid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wax.lp.bean.CrmRole">
+    update crm_role
+    <set>
+      <if test="rolecontent != null">
+        rolecontent = #{rolecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionid != null">
+        permissionid = #{permissionid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wax.lp.bean.CrmRole">
+    update crm_role
+    set rolecontent = #{rolecontent,jdbcType=VARCHAR},
+      permissionid = #{permissionid,jdbcType=INTEGER}
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </update>
+</mapper>

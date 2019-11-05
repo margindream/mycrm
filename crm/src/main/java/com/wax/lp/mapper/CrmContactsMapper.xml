@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wax.lp.dao.CrmContactsMapper">
+  <resultMap id="BaseResultMap" type="com.wax.lp.bean.CrmContacts">
+    <id column="contactsid" jdbcType="INTEGER" property="contactsid" />
+    <result column="creatoruserid" jdbcType="INTEGER" property="creatoruserid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="post" jdbcType="VARCHAR" property="post" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="saltname" jdbcType="VARCHAR" property="saltname" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="qqno" jdbcType="VARCHAR" property="qqno" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="zipcode" jdbcType="VARCHAR" property="zipcode" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="customerid" jdbcType="INTEGER" property="customerid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="deletestatus" jdbcType="INTEGER" property="deletestatus" />
+    <result column="deleteuserid" jdbcType="INTEGER" property="deleteuserid" />
+    <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    contactsid, creatoruserid, name, post, department, sex, saltname, telephone, email, 
+    qqno, address, zipcode, description, customerid, createtime, updatetime, deletestatus, 
+    deleteuserid, deletetime
+  </sql>
+  <select id="selectByExample" parameterType="com.wax.lp.bean.CrmContactsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_contacts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_contacts
+    where contactsid = #{contactsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from crm_contacts
+    where contactsid = #{contactsid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wax.lp.bean.CrmContactsExample">
+    delete from crm_contacts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wax.lp.bean.CrmContacts">
+    insert into crm_contacts (contactsid, creatoruserid, name, 
+      post, department, sex, 
+      saltname, telephone, email, 
+      qqno, address, zipcode, 
+      description, customerid, createtime, 
+      updatetime, deletestatus, deleteuserid, 
+      deletetime)
+    values (#{contactsid,jdbcType=INTEGER}, #{creatoruserid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{post,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{saltname,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{qqno,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{customerid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{deletestatus,jdbcType=INTEGER}, #{deleteuserid,jdbcType=INTEGER}, 
+      #{deletetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wax.lp.bean.CrmContacts">
+    insert into crm_contacts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contactsid != null">
+        contactsid,
+      </if>
+      <if test="creatoruserid != null">
+        creatoruserid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="post != null">
+        post,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="saltname != null">
+        saltname,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qqno != null">
+        qqno,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="zipcode != null">
+        zipcode,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="customerid != null">
+        customerid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="deletestatus != null">
+        deletestatus,
+      </if>
+      <if test="deleteuserid != null">
+        deleteuserid,
+      </if>
+      <if test="deletetime != null">
+        deletetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contactsid != null">
+        #{contactsid,jdbcType=INTEGER},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="saltname != null">
+        #{saltname,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qqno != null">
+        #{qqno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletestatus != null">
+        #{deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteuserid != null">
+        #{deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wax.lp.bean.CrmContactsExample" resultType="java.lang.Long">
+    select count(*) from crm_contacts
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update crm_contacts
+    <set>
+      <if test="record.contactsid != null">
+        contactsid = #{record.contactsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatoruserid != null">
+        creatoruserid = #{record.creatoruserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.post != null">
+        post = #{record.post,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null">
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saltname != null">
+        saltname = #{record.saltname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qqno != null">
+        qqno = #{record.qqno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipcode != null">
+        zipcode = #{record.zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerid != null">
+        customerid = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletestatus != null">
+        deletestatus = #{record.deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteuserid != null">
+        deleteuserid = #{record.deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deletetime != null">
+        deletetime = #{record.deletetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update crm_contacts
+    set contactsid = #{record.contactsid,jdbcType=INTEGER},
+      creatoruserid = #{record.creatoruserid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      post = #{record.post,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      saltname = #{record.saltname,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      qqno = #{record.qqno,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      zipcode = #{record.zipcode,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      customerid = #{record.customerid,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      deletestatus = #{record.deletestatus,jdbcType=INTEGER},
+      deleteuserid = #{record.deleteuserid,jdbcType=INTEGER},
+      deletetime = #{record.deletetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wax.lp.bean.CrmContacts">
+    update crm_contacts
+    <set>
+      <if test="creatoruserid != null">
+        creatoruserid = #{creatoruserid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="saltname != null">
+        saltname = #{saltname,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qqno != null">
+        qqno = #{qqno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null">
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletestatus != null">
+        deletestatus = #{deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteuserid != null">
+        deleteuserid = #{deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="deletetime != null">
+        deletetime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where contactsid = #{contactsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wax.lp.bean.CrmContacts">
+    update crm_contacts
+    set creatoruserid = #{creatoruserid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      post = #{post,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      saltname = #{saltname,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      qqno = #{qqno,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      customerid = #{customerid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      deletestatus = #{deletestatus,jdbcType=INTEGER},
+      deleteuserid = #{deleteuserid,jdbcType=INTEGER},
+      deletetime = #{deletetime,jdbcType=TIMESTAMP}
+    where contactsid = #{contactsid,jdbcType=INTEGER}
+  </update>
+</mapper>

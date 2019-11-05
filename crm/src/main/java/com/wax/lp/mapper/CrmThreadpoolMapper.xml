@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wax.lp.dao.CrmThreadpoolMapper">
+  <resultMap id="BaseResultMap" type="com.wax.lp.bean.CrmThreadpool">
+    <id column="treadid" jdbcType="INTEGER" property="treadid" />
+    <result column="ownerid" jdbcType="INTEGER" property="ownerid" />
+    <result column="createid" jdbcType="INTEGER" property="createid" />
+    <result column="companyname" jdbcType="VARCHAR" property="companyname" />
+    <result column="contactsposition" jdbcType="VARCHAR" property="contactsposition" />
+    <result column="contactsname" jdbcType="VARCHAR" property="contactsname" />
+    <result column="saltname" jdbcType="VARCHAR" property="saltname" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="createtime" jdbcType="DATE" property="createtime" />
+    <result column="updatetime" jdbcType="DATE" property="updatetime" />
+    <result column="deletestatus" jdbcType="INTEGER" property="deletestatus" />
+    <result column="deleteuserid" jdbcType="INTEGER" property="deleteuserid" />
+    <result column="deletetime" jdbcType="DATE" property="deletetime" />
+    <result column="istransformed" jdbcType="INTEGER" property="istransformed" />
+    <result column="transformuserid" jdbcType="INTEGER" property="transformuserid" />
+    <result column="contactsid" jdbcType="INTEGER" property="contactsid" />
+    <result column="customerid" jdbcType="INTEGER" property="customerid" />
+    <result column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="nextstep" jdbcType="VARCHAR" property="nextstep" />
+    <result column="nexttime" jdbcType="DATE" property="nexttime" />
+    <result column="havetime" jdbcType="DATE" property="havetime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="leadnote" jdbcType="VARCHAR" property="leadnote" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    treadid, ownerid, createid, companyname, contactsposition, contactsname, saltname, 
+    mobile, email, createtime, updatetime, deletestatus, deleteuserid, deletetime, istransformed, 
+    transformuserid, contactsid, customerid, businessid, nextstep, nexttime, havetime, 
+    address, source, leadnote
+  </sql>
+  <select id="selectByExample" parameterType="com.wax.lp.bean.CrmThreadpoolExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_threadpool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_threadpool
+    where treadid = #{treadid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from crm_threadpool
+    where treadid = #{treadid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wax.lp.bean.CrmThreadpoolExample">
+    delete from crm_threadpool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wax.lp.bean.CrmThreadpool">
+    insert into crm_threadpool (treadid, ownerid, createid, 
+      companyname, contactsposition, contactsname, 
+      saltname, mobile, email, 
+      createtime, updatetime, deletestatus, 
+      deleteuserid, deletetime, istransformed, 
+      transformuserid, contactsid, customerid, 
+      businessid, nextstep, nexttime, 
+      havetime, address, source, 
+      leadnote)
+    values (#{treadid,jdbcType=INTEGER}, #{ownerid,jdbcType=INTEGER}, #{createid,jdbcType=INTEGER}, 
+      #{companyname,jdbcType=VARCHAR}, #{contactsposition,jdbcType=VARCHAR}, #{contactsname,jdbcType=VARCHAR}, 
+      #{saltname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=DATE}, #{updatetime,jdbcType=DATE}, #{deletestatus,jdbcType=INTEGER}, 
+      #{deleteuserid,jdbcType=INTEGER}, #{deletetime,jdbcType=DATE}, #{istransformed,jdbcType=INTEGER}, 
+      #{transformuserid,jdbcType=INTEGER}, #{contactsid,jdbcType=INTEGER}, #{customerid,jdbcType=INTEGER}, 
+      #{businessid,jdbcType=INTEGER}, #{nextstep,jdbcType=VARCHAR}, #{nexttime,jdbcType=DATE}, 
+      #{havetime,jdbcType=DATE}, #{address,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{leadnote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wax.lp.bean.CrmThreadpool">
+    insert into crm_threadpool
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="treadid != null">
+        treadid,
+      </if>
+      <if test="ownerid != null">
+        ownerid,
+      </if>
+      <if test="createid != null">
+        createid,
+      </if>
+      <if test="companyname != null">
+        companyname,
+      </if>
+      <if test="contactsposition != null">
+        contactsposition,
+      </if>
+      <if test="contactsname != null">
+        contactsname,
+      </if>
+      <if test="saltname != null">
+        saltname,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="deletestatus != null">
+        deletestatus,
+      </if>
+      <if test="deleteuserid != null">
+        deleteuserid,
+      </if>
+      <if test="deletetime != null">
+        deletetime,
+      </if>
+      <if test="istransformed != null">
+        istransformed,
+      </if>
+      <if test="transformuserid != null">
+        transformuserid,
+      </if>
+      <if test="contactsid != null">
+        contactsid,
+      </if>
+      <if test="customerid != null">
+        customerid,
+      </if>
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="nextstep != null">
+        nextstep,
+      </if>
+      <if test="nexttime != null">
+        nexttime,
+      </if>
+      <if test="havetime != null">
+        havetime,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="leadnote != null">
+        leadnote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="treadid != null">
+        #{treadid,jdbcType=INTEGER},
+      </if>
+      <if test="ownerid != null">
+        #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createid != null">
+        #{createid,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null">
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsposition != null">
+        #{contactsposition,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsname != null">
+        #{contactsname,jdbcType=VARCHAR},
+      </if>
+      <if test="saltname != null">
+        #{saltname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="deletestatus != null">
+        #{deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteuserid != null">
+        #{deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=DATE},
+      </if>
+      <if test="istransformed != null">
+        #{istransformed,jdbcType=INTEGER},
+      </if>
+      <if test="transformuserid != null">
+        #{transformuserid,jdbcType=INTEGER},
+      </if>
+      <if test="contactsid != null">
+        #{contactsid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="nextstep != null">
+        #{nextstep,jdbcType=VARCHAR},
+      </if>
+      <if test="nexttime != null">
+        #{nexttime,jdbcType=DATE},
+      </if>
+      <if test="havetime != null">
+        #{havetime,jdbcType=DATE},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="leadnote != null">
+        #{leadnote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wax.lp.bean.CrmThreadpoolExample" resultType="java.lang.Long">
+    select count(*) from crm_threadpool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update crm_threadpool
+    <set>
+      <if test="record.treadid != null">
+        treadid = #{record.treadid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ownerid != null">
+        ownerid = #{record.ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createid != null">
+        createid = #{record.createid,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyname != null">
+        companyname = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactsposition != null">
+        contactsposition = #{record.contactsposition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactsname != null">
+        contactsname = #{record.contactsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saltname != null">
+        saltname = #{record.saltname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=DATE},
+      </if>
+      <if test="record.deletestatus != null">
+        deletestatus = #{record.deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteuserid != null">
+        deleteuserid = #{record.deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deletetime != null">
+        deletetime = #{record.deletetime,jdbcType=DATE},
+      </if>
+      <if test="record.istransformed != null">
+        istransformed = #{record.istransformed,jdbcType=INTEGER},
+      </if>
+      <if test="record.transformuserid != null">
+        transformuserid = #{record.transformuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.contactsid != null">
+        contactsid = #{record.contactsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerid != null">
+        customerid = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessid != null">
+        businessid = #{record.businessid,jdbcType=INTEGER},
+      </if>
+      <if test="record.nextstep != null">
+        nextstep = #{record.nextstep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nexttime != null">
+        nexttime = #{record.nexttime,jdbcType=DATE},
+      </if>
+      <if test="record.havetime != null">
+        havetime = #{record.havetime,jdbcType=DATE},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null">
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leadnote != null">
+        leadnote = #{record.leadnote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update crm_threadpool
+    set treadid = #{record.treadid,jdbcType=INTEGER},
+      ownerid = #{record.ownerid,jdbcType=INTEGER},
+      createid = #{record.createid,jdbcType=INTEGER},
+      companyname = #{record.companyname,jdbcType=VARCHAR},
+      contactsposition = #{record.contactsposition,jdbcType=VARCHAR},
+      contactsname = #{record.contactsname,jdbcType=VARCHAR},
+      saltname = #{record.saltname,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=DATE},
+      updatetime = #{record.updatetime,jdbcType=DATE},
+      deletestatus = #{record.deletestatus,jdbcType=INTEGER},
+      deleteuserid = #{record.deleteuserid,jdbcType=INTEGER},
+      deletetime = #{record.deletetime,jdbcType=DATE},
+      istransformed = #{record.istransformed,jdbcType=INTEGER},
+      transformuserid = #{record.transformuserid,jdbcType=INTEGER},
+      contactsid = #{record.contactsid,jdbcType=INTEGER},
+      customerid = #{record.customerid,jdbcType=INTEGER},
+      businessid = #{record.businessid,jdbcType=INTEGER},
+      nextstep = #{record.nextstep,jdbcType=VARCHAR},
+      nexttime = #{record.nexttime,jdbcType=DATE},
+      havetime = #{record.havetime,jdbcType=DATE},
+      address = #{record.address,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      leadnote = #{record.leadnote,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wax.lp.bean.CrmThreadpool">
+    update crm_threadpool
+    <set>
+      <if test="ownerid != null">
+        ownerid = #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createid != null">
+        createid = #{createid,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null">
+        companyname = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsposition != null">
+        contactsposition = #{contactsposition,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsname != null">
+        contactsname = #{contactsname,jdbcType=VARCHAR},
+      </if>
+      <if test="saltname != null">
+        saltname = #{saltname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="deletestatus != null">
+        deletestatus = #{deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteuserid != null">
+        deleteuserid = #{deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="deletetime != null">
+        deletetime = #{deletetime,jdbcType=DATE},
+      </if>
+      <if test="istransformed != null">
+        istransformed = #{istransformed,jdbcType=INTEGER},
+      </if>
+      <if test="transformuserid != null">
+        transformuserid = #{transformuserid,jdbcType=INTEGER},
+      </if>
+      <if test="contactsid != null">
+        contactsid = #{contactsid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null">
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="nextstep != null">
+        nextstep = #{nextstep,jdbcType=VARCHAR},
+      </if>
+      <if test="nexttime != null">
+        nexttime = #{nexttime,jdbcType=DATE},
+      </if>
+      <if test="havetime != null">
+        havetime = #{havetime,jdbcType=DATE},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="leadnote != null">
+        leadnote = #{leadnote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where treadid = #{treadid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wax.lp.bean.CrmThreadpool">
+    update crm_threadpool
+    set ownerid = #{ownerid,jdbcType=INTEGER},
+      createid = #{createid,jdbcType=INTEGER},
+      companyname = #{companyname,jdbcType=VARCHAR},
+      contactsposition = #{contactsposition,jdbcType=VARCHAR},
+      contactsname = #{contactsname,jdbcType=VARCHAR},
+      saltname = #{saltname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=DATE},
+      deletestatus = #{deletestatus,jdbcType=INTEGER},
+      deleteuserid = #{deleteuserid,jdbcType=INTEGER},
+      deletetime = #{deletetime,jdbcType=DATE},
+      istransformed = #{istransformed,jdbcType=INTEGER},
+      transformuserid = #{transformuserid,jdbcType=INTEGER},
+      contactsid = #{contactsid,jdbcType=INTEGER},
+      customerid = #{customerid,jdbcType=INTEGER},
+      businessid = #{businessid,jdbcType=INTEGER},
+      nextstep = #{nextstep,jdbcType=VARCHAR},
+      nexttime = #{nexttime,jdbcType=DATE},
+      havetime = #{havetime,jdbcType=DATE},
+      address = #{address,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      leadnote = #{leadnote,jdbcType=VARCHAR}
+    where treadid = #{treadid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- * 批量添加线索
+ * @param CrmThreadList
+ * @return -->
+<insert id="saveCrmThreadPoolLists" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="treadid">
+	     insert into crm_threadpool (treadid, ownerid, createid, 
+	      companyname, contactsposition, contactsname, 
+	      saltname, mobile, email, 
+	      createtime, updatetime, deletestatus, 
+	      deleteuserid, deletetime, istransformed, 
+	      transformuserid, contactsid, customerid, 
+	      businessid, nextstep, nexttime, 
+	      havetime, address, source, 
+	      leadnote)
+	    values
+    <foreach collection="list" item="item" index="index" separator=",">
+	     	(#{item.treadid,jdbcType=INTEGER}, #{item.ownerid,jdbcType=INTEGER}, #{item.createid,jdbcType=INTEGER}, 
+	      #{item.companyname,jdbcType=VARCHAR}, #{item.contactsposition,jdbcType=VARCHAR}, #{item.contactsname,jdbcType=VARCHAR}, 
+	      #{item.saltname,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, 
+	      #{item.createtime,jdbcType=DATE}, #{item.updatetime,jdbcType=DATE}, #{item.deletestatus,jdbcType=INTEGER}, 
+	      #{item.deleteuserid,jdbcType=INTEGER}, #{item.deletetime,jdbcType=DATE}, #{item.istransformed,jdbcType=INTEGER}, 
+	      #{item.transformuserid,jdbcType=INTEGER}, #{item.contactsid,jdbcType=INTEGER}, #{item.customerid,jdbcType=INTEGER}, 
+	      #{item.businessid,jdbcType=INTEGER}, #{item.nextstep,jdbcType=VARCHAR}, #{item.nexttime,jdbcType=DATE}, 
+	      #{item.havetime,jdbcType=DATE}, #{item.address,jdbcType=VARCHAR}, #{item.source,jdbcType=VARCHAR}, 
+	      #{item.leadnote,jdbcType=VARCHAR})
+    </foreach>
+</insert>
+</mapper>

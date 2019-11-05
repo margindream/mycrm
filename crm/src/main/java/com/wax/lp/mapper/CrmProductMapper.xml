@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wax.lp.dao.CrmProductMapper">
+  <resultMap id="BaseResultMap" type="com.wax.lp.bean.CrmProduct">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="categoryid" jdbcType="INTEGER" property="categoryid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="createuserid" jdbcType="INTEGER" property="createuserid" />
+    <result column="costprice" jdbcType="REAL" property="costprice" />
+    <result column="suggestedprice" jdbcType="REAL" property="suggestedprice" />
+    <result column="developmentteam" jdbcType="VARCHAR" property="developmentteam" />
+    <result column="developmenttime" jdbcType="TIMESTAMP" property="developmenttime" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, categoryid, name, createuserid, costprice, suggestedprice, developmentteam, developmenttime, 
+    link, createtime, updatetime, description
+  </sql>
+  <select id="selectByExample" parameterType="com.wax.lp.bean.CrmProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from crm_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wax.lp.bean.CrmProductExample">
+    delete from crm_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wax.lp.bean.CrmProduct">
+    insert into crm_product (id, categoryid, name, 
+      createuserid, costprice, suggestedprice, 
+      developmentteam, developmenttime, link, 
+      createtime, updatetime, description
+      )
+    values (#{id,jdbcType=INTEGER}, #{categoryid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{createuserid,jdbcType=INTEGER}, #{costprice,jdbcType=REAL}, #{suggestedprice,jdbcType=REAL}, 
+      #{developmentteam,jdbcType=VARCHAR}, #{developmenttime,jdbcType=TIMESTAMP}, #{link,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wax.lp.bean.CrmProduct">
+    insert into crm_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="categoryid != null">
+        categoryid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="costprice != null">
+        costprice,
+      </if>
+      <if test="suggestedprice != null">
+        suggestedprice,
+      </if>
+      <if test="developmentteam != null">
+        developmentteam,
+      </if>
+      <if test="developmenttime != null">
+        developmenttime,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="costprice != null">
+        #{costprice,jdbcType=REAL},
+      </if>
+      <if test="suggestedprice != null">
+        #{suggestedprice,jdbcType=REAL},
+      </if>
+      <if test="developmentteam != null">
+        #{developmentteam,jdbcType=VARCHAR},
+      </if>
+      <if test="developmenttime != null">
+        #{developmenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wax.lp.bean.CrmProductExample" resultType="java.lang.Long">
+    select count(*) from crm_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update crm_product
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryid != null">
+        categoryid = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null">
+        createuserid = #{record.createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.costprice != null">
+        costprice = #{record.costprice,jdbcType=REAL},
+      </if>
+      <if test="record.suggestedprice != null">
+        suggestedprice = #{record.suggestedprice,jdbcType=REAL},
+      </if>
+      <if test="record.developmentteam != null">
+        developmentteam = #{record.developmentteam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.developmenttime != null">
+        developmenttime = #{record.developmenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.link != null">
+        link = #{record.link,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update crm_product
+    set id = #{record.id,jdbcType=INTEGER},
+      categoryid = #{record.categoryid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      createuserid = #{record.createuserid,jdbcType=INTEGER},
+      costprice = #{record.costprice,jdbcType=REAL},
+      suggestedprice = #{record.suggestedprice,jdbcType=REAL},
+      developmentteam = #{record.developmentteam,jdbcType=VARCHAR},
+      developmenttime = #{record.developmenttime,jdbcType=TIMESTAMP},
+      link = #{record.link,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wax.lp.bean.CrmProduct">
+    update crm_product
+    <set>
+      <if test="categoryid != null">
+        categoryid = #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="costprice != null">
+        costprice = #{costprice,jdbcType=REAL},
+      </if>
+      <if test="suggestedprice != null">
+        suggestedprice = #{suggestedprice,jdbcType=REAL},
+      </if>
+      <if test="developmentteam != null">
+        developmentteam = #{developmentteam,jdbcType=VARCHAR},
+      </if>
+      <if test="developmenttime != null">
+        developmenttime = #{developmenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wax.lp.bean.CrmProduct">
+    update crm_product
+    set categoryid = #{categoryid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=INTEGER},
+      costprice = #{costprice,jdbcType=REAL},
+      suggestedprice = #{suggestedprice,jdbcType=REAL},
+      developmentteam = #{developmentteam,jdbcType=VARCHAR},
+      developmenttime = #{developmenttime,jdbcType=TIMESTAMP},
+      link = #{link,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

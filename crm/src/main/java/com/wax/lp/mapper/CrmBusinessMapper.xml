@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wax.lp.dao.CrmBusinessMapper">
+  <resultMap id="BaseResultMap" type="com.wax.lp.bean.CrmBusiness">
+    <id column="businessid" jdbcType="INTEGER" property="businessid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="estimateprice" jdbcType="INTEGER" property="estimateprice" />
+    <result column="customerid" jdbcType="INTEGER" property="customerid" />
+    <result column="creatorid" jdbcType="INTEGER" property="creatorid" />
+    <result column="ownerid" jdbcType="INTEGER" property="ownerid" />
+    <result column="gainrate" jdbcType="INTEGER" property="gainrate" />
+    <result column="totalamount" jdbcType="INTEGER" property="totalamount" />
+    <result column="subtotal" jdbcType="REAL" property="subtotal" />
+    <result column="discountprice" jdbcType="REAL" property="discountprice" />
+    <result column="salesprice" jdbcType="REAL" property="salesprice" />
+    <result column="duedate" jdbcType="DATE" property="duedate" />
+    <result column="createtime"  property="createtime" />
+    <result column="updatetime"  property="updatetime" />
+    <result column="updateuserid" jdbcType="INTEGER" property="updateuserid" />
+    <result column="statusid" jdbcType="INTEGER" property="statusid" />
+    <result column="totalprice" jdbcType="REAL" property="totalprice" />
+    <result column="nextstep" jdbcType="VARCHAR" property="nextstep" />
+    <result column="nexttime"  property="nexttime" />
+    <result column="deletestatus" jdbcType="INTEGER" property="deletestatus" />
+    <result column="deleteuserid" jdbcType="INTEGER" property="deleteuserid" />
+    <result column="deletetime"  property="deletetime" />
+    <result column="contactsid" jdbcType="INTEGER" property="contactsid" />
+    <result column="contactaddress" jdbcType="VARCHAR" property="contactaddress" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    businessid, name, origin, type, estimateprice, customerid, creatorid, ownerid, gainrate, 
+    totalamount, subtotal, discountprice, salesprice, duedate, createtime, updatetime, 
+    updateuserid, statusid, totalprice, nextstep, nexttime, deletestatus, deleteuserid, 
+    deletetime, contactsid, contactaddress, description
+  </sql>
+  <select id="selectByExample" parameterType="com.wax.lp.bean.CrmBusinessExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_business
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from crm_business
+    where businessid = #{businessid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from crm_business
+    where businessid = #{businessid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wax.lp.bean.CrmBusinessExample">
+    delete from crm_business
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wax.lp.bean.CrmBusiness">
+    insert into crm_business (businessid, name, origin, 
+      type, estimateprice, customerid, 
+      creatorid, ownerid, gainrate, 
+      totalamount, subtotal, discountprice, 
+      salesprice, duedate, createtime, 
+      updatetime, updateuserid, statusid, 
+      totalprice, nextstep, nexttime, 
+      deletestatus, deleteuserid, deletetime, 
+      contactsid, contactaddress, description
+      )
+    values (#{businessid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{estimateprice,jdbcType=INTEGER}, #{customerid,jdbcType=INTEGER}, 
+      #{creatorid,jdbcType=INTEGER}, #{ownerid,jdbcType=INTEGER}, #{gainrate,jdbcType=INTEGER}, 
+      #{totalamount,jdbcType=INTEGER}, #{subtotal,jdbcType=REAL}, #{discountprice,jdbcType=REAL}, 
+      #{salesprice,jdbcType=REAL}, #{duedate,jdbcType=DATE}, #{createtime,jdbcType=DATE}, 
+      #{updatetime,jdbcType=DATE}, #{updateuserid,jdbcType=INTEGER}, #{statusid,jdbcType=INTEGER}, 
+      #{totalprice,jdbcType=REAL}, #{nextstep,jdbcType=VARCHAR}, #{nexttime,jdbcType=DATE}, 
+      #{deletestatus,jdbcType=INTEGER}, #{deleteuserid,jdbcType=INTEGER}, #{deletetime,jdbcType=DATE}, 
+      #{contactsid,jdbcType=INTEGER}, #{contactaddress,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wax.lp.bean.CrmBusiness">
+    insert into crm_business
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="origin != null">
+        origin,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="estimateprice != null">
+        estimateprice,
+      </if>
+      <if test="customerid != null">
+        customerid,
+      </if>
+      <if test="creatorid != null">
+        creatorid,
+      </if>
+      <if test="ownerid != null">
+        ownerid,
+      </if>
+      <if test="gainrate != null">
+        gainrate,
+      </if>
+      <if test="totalamount != null">
+        totalamount,
+      </if>
+      <if test="subtotal != null">
+        subtotal,
+      </if>
+      <if test="discountprice != null">
+        discountprice,
+      </if>
+      <if test="salesprice != null">
+        salesprice,
+      </if>
+      <if test="duedate != null">
+        duedate,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="updateuserid != null">
+        updateuserid,
+      </if>
+      <if test="statusid != null">
+        statusid,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="nextstep != null">
+        nextstep,
+      </if>
+      <if test="nexttime != null">
+        nexttime,
+      </if>
+      <if test="deletestatus != null">
+        deletestatus,
+      </if>
+      <if test="deleteuserid != null">
+        deleteuserid,
+      </if>
+      <if test="deletetime != null">
+        deletetime,
+      </if>
+      <if test="contactsid != null">
+        contactsid,
+      </if>
+      <if test="contactaddress != null">
+        contactaddress,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessid != null">
+        #{businessid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateprice != null">
+        #{estimateprice,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="creatorid != null">
+        #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="ownerid != null">
+        #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="gainrate != null">
+        #{gainrate,jdbcType=INTEGER},
+      </if>
+      <if test="totalamount != null">
+        #{totalamount,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null">
+        #{subtotal,jdbcType=REAL},
+      </if>
+      <if test="discountprice != null">
+        #{discountprice,jdbcType=REAL},
+      </if>
+      <if test="salesprice != null">
+        #{salesprice,jdbcType=REAL},
+      </if>
+      <if test="duedate != null">
+        #{duedate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updateuserid != null">
+        #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="statusid != null">
+        #{statusid,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=REAL},
+      </if>
+      <if test="nextstep != null">
+        #{nextstep,jdbcType=VARCHAR},
+      </if>
+      <if test="nexttime != null">
+        #{nexttime,jdbcType=DATE},
+      </if>
+      <if test="deletestatus != null">
+        #{deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteuserid != null">
+        #{deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=DATE},
+      </if>
+      <if test="contactsid != null">
+        #{contactsid,jdbcType=INTEGER},
+      </if>
+      <if test="contactaddress != null">
+        #{contactaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wax.lp.bean.CrmBusinessExample" resultType="java.lang.Long">
+    select count(*) from crm_business
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update crm_business
+    <set>
+      <if test="record.businessid != null">
+        businessid = #{record.businessid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origin != null">
+        origin = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estimateprice != null">
+        estimateprice = #{record.estimateprice,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerid != null">
+        customerid = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatorid != null">
+        creatorid = #{record.creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ownerid != null">
+        ownerid = #{record.ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.gainrate != null">
+        gainrate = #{record.gainrate,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalamount != null">
+        totalamount = #{record.totalamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.subtotal != null">
+        subtotal = #{record.subtotal,jdbcType=REAL},
+      </if>
+      <if test="record.discountprice != null">
+        discountprice = #{record.discountprice,jdbcType=REAL},
+      </if>
+      <if test="record.salesprice != null">
+        salesprice = #{record.salesprice,jdbcType=REAL},
+      </if>
+      <if test="record.duedate != null">
+        duedate = #{record.duedate,jdbcType=DATE},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=DATE},
+      </if>
+      <if test="record.updateuserid != null">
+        updateuserid = #{record.updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.statusid != null">
+        statusid = #{record.statusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalprice != null">
+        totalprice = #{record.totalprice,jdbcType=REAL},
+      </if>
+      <if test="record.nextstep != null">
+        nextstep = #{record.nextstep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nexttime != null">
+        nexttime = #{record.nexttime,jdbcType=DATE},
+      </if>
+      <if test="record.deletestatus != null">
+        deletestatus = #{record.deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteuserid != null">
+        deleteuserid = #{record.deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deletetime != null">
+        deletetime = #{record.deletetime,jdbcType=DATE},
+      </if>
+      <if test="record.contactsid != null">
+        contactsid = #{record.contactsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.contactaddress != null">
+        contactaddress = #{record.contactaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update crm_business
+    set businessid = #{record.businessid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      origin = #{record.origin,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      estimateprice = #{record.estimateprice,jdbcType=INTEGER},
+      customerid = #{record.customerid,jdbcType=INTEGER},
+      creatorid = #{record.creatorid,jdbcType=INTEGER},
+      ownerid = #{record.ownerid,jdbcType=INTEGER},
+      gainrate = #{record.gainrate,jdbcType=INTEGER},
+      totalamount = #{record.totalamount,jdbcType=INTEGER},
+      subtotal = #{record.subtotal,jdbcType=REAL},
+      discountprice = #{record.discountprice,jdbcType=REAL},
+      salesprice = #{record.salesprice,jdbcType=REAL},
+      duedate = #{record.duedate,jdbcType=DATE},
+      createtime = #{record.createtime,jdbcType=DATE},
+      updatetime = #{record.updatetime,jdbcType=DATE},
+      updateuserid = #{record.updateuserid,jdbcType=INTEGER},
+      statusid = #{record.statusid,jdbcType=INTEGER},
+      totalprice = #{record.totalprice,jdbcType=REAL},
+      nextstep = #{record.nextstep,jdbcType=VARCHAR},
+      nexttime = #{record.nexttime,jdbcType=DATE},
+      deletestatus = #{record.deletestatus,jdbcType=INTEGER},
+      deleteuserid = #{record.deleteuserid,jdbcType=INTEGER},
+      deletetime = #{record.deletetime,jdbcType=DATE},
+      contactsid = #{record.contactsid,jdbcType=INTEGER},
+      contactaddress = #{record.contactaddress,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wax.lp.bean.CrmBusiness">
+    update crm_business
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateprice != null">
+        estimateprice = #{estimateprice,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null">
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="creatorid != null">
+        creatorid = #{creatorid,jdbcType=INTEGER},
+      </if>
+      <if test="ownerid != null">
+        ownerid = #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="gainrate != null">
+        gainrate = #{gainrate,jdbcType=INTEGER},
+      </if>
+      <if test="totalamount != null">
+        totalamount = #{totalamount,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null">
+        subtotal = #{subtotal,jdbcType=REAL},
+      </if>
+      <if test="discountprice != null">
+        discountprice = #{discountprice,jdbcType=REAL},
+      </if>
+      <if test="salesprice != null">
+        salesprice = #{salesprice,jdbcType=REAL},
+      </if>
+      <if test="duedate != null">
+        duedate = #{duedate,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="updateuserid != null">
+        updateuserid = #{updateuserid,jdbcType=INTEGER},
+      </if>
+      <if test="statusid != null">
+        statusid = #{statusid,jdbcType=INTEGER},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=REAL},
+      </if>
+      <if test="nextstep != null">
+        nextstep = #{nextstep,jdbcType=VARCHAR},
+      </if>
+      <if test="nexttime != null">
+        nexttime = #{nexttime,jdbcType=DATE},
+      </if>
+      <if test="deletestatus != null">
+        deletestatus = #{deletestatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteuserid != null">
+        deleteuserid = #{deleteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="deletetime != null">
+        deletetime = #{deletetime,jdbcType=DATE},
+      </if>
+      <if test="contactsid != null">
+        contactsid = #{contactsid,jdbcType=INTEGER},
+      </if>
+      <if test="contactaddress != null">
+        contactaddress = #{contactaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where businessid = #{businessid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wax.lp.bean.CrmBusiness">
+    update crm_business
+    set name = #{name,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      estimateprice = #{estimateprice,jdbcType=INTEGER},
+      customerid = #{customerid,jdbcType=INTEGER},
+      creatorid = #{creatorid,jdbcType=INTEGER},
+      ownerid = #{ownerid,jdbcType=INTEGER},
+      gainrate = #{gainrate,jdbcType=INTEGER},
+      totalamount = #{totalamount,jdbcType=INTEGER},
+      subtotal = #{subtotal,jdbcType=REAL},
+      discountprice = #{discountprice,jdbcType=REAL},
+      salesprice = #{salesprice,jdbcType=REAL},
+      duedate = #{duedate,jdbcType=DATE},
+      createtime = #{createtime,jdbcType=DATE},
+      updatetime = #{updatetime,jdbcType=DATE},
+      updateuserid = #{updateuserid,jdbcType=INTEGER},
+      statusid = #{statusid,jdbcType=INTEGER},
+      totalprice = #{totalprice,jdbcType=REAL},
+      nextstep = #{nextstep,jdbcType=VARCHAR},
+      nexttime = #{nexttime,jdbcType=DATE},
+      deletestatus = #{deletestatus,jdbcType=INTEGER},
+      deleteuserid = #{deleteuserid,jdbcType=INTEGER},
+      deletetime = #{deletetime,jdbcType=DATE},
+      contactsid = #{contactsid,jdbcType=INTEGER},
+      contactaddress = #{contactaddress,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where businessid = #{businessid,jdbcType=INTEGER}
+  </update>
+</mapper>

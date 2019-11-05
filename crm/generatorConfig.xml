@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	<commentGenerator>
+  	<!-- 是否去除自动生成的注释 -->
+	  <property name="suppressAllComments" value="true" />
+	</commentGenerator>
+	
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql:///crm"
+        userId="root"
+        password="1234">
+    </jdbcConnection>
+    
+	<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+            NUMERIC 类型解析为java.math.BigDecimal -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!-- 指定javabean生成位置 -->
+    <javaModelGenerator targetPackage="com.wax.lp.bean" targetProject=".\src\main\java">
+    	<!-- enableSubPackages:是否让schema作为包的后缀 -->
+      <property name="enableSubPackages" value="false" />
+              <!-- 从数据库返回的值被清理前后的空格 -->
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+	<!-- 指定sql映射文件生成位置 -->
+    <sqlMapGenerator targetPackage="com.wax.lp.mapper"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="false" />
+    </sqlMapGenerator>
+
+	<!-- 指定dao接口文件生成位置 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.wax.lp.dao"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="false" />
+    </javaClientGenerator>
+	<!-- 指定每个表的生成 -->
+   	    <!-- <table tableName="crm_announcement" schema="Announcement"></table>
+		<table tableName="crm_business" schema="Business"></table>
+		<table tableName="crm_business_customer" schema="BusinessCustomer"></table>
+		<table tableName="crm_business_product" schema="BusinessProduct"></table>
+		<table tableName="crm_businessstatus" schema="BusinessStatus"></table>
+		<table tableName="crm_contacts" schema="Contacts"></table>
+		<table tableName="crm_contract" schema="Contract"></table>
+		<table tableName="crm_customer" schema="Customer"></table>
+		<table tableName="crm_department" schema="Department"></table>
+		<table tableName="crm_email_record" schema="EmailRecord"></table>
+		<table tableName="crm_email_template" schema="EmailTemplate"></table>
+		<table tableName="crm_employee" schema="Employee"></table>
+		<table tableName="crm_login_history" schema="LoginHistory"></table>
+		<table tableName="crm_message" schema="Message"></table>
+		<table tableName="crm_permission" schema="Permission"></table>
+		<table tableName="crm_position" schema="Position"></table>
+		<table tableName="crm_product" schema="Product"></table>
+		<table tableName="crm_product_category" schema="ProductCategory"></table>
+		<table tableName="crm_product_images" schema="ProductImages"></table>
+		<table tableName="crm_r_business_contract" schema="BusinessContract"></table>
+		<table tableName="crm_r_business_task" schema="BusinessTask"></table>
+		<table tableName="crm_role" schema="Role"></table>
+		<table tableName="crm_sms_record" schema="Record"></table>
+		<table tableName="crm_sms_template" schema="Template"></table>
+		<table tableName="crm_system_user" schema="SystemUser"></table>
+		<table tableName="crm_task" schema="Task"></table>
+		<table tableName="crm_thread" schema="Thread"></table>
+ -->
+		<table tableName="crm_huishouzhan" schema="HuiShouZhan"></table>
+  </context>
+</generatorConfiguration>
